@@ -1,0 +1,2730 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fleacia</title>
+    <meta name="description" content="">
+    <style>
+        @charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+/* 1. Use border-box for all elements */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Chrome, Safari, Edge, Opera用 */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* Firefox, IE用 */
+html, body {
+    -ms-overflow-style: none;  /* IE, Edge Legacy */
+    scrollbar-width: none;  /* Firefox */
+}
+
+
+/* 2. Remove default margin from common elements */
+body, h1, h2, h3, h4, h5, h6,
+p, figure, blockquote, dl, dd {
+  margin: 0;
+}
+
+/* 3. Remove list styles on ul/ol elements with a role of list */
+ul[role=list], ol[role=list] {
+  list-style: none;
+}
+
+/* 4. Set core root defaults */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* 5. Set core body defaults */
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: antialiased;
+  font-family: system-ui, sans-serif;
+  background-color: #fff;
+  color: #000;
+}
+
+/* 6. Make images easier to work with */
+img, picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* 7. Inherit fonts for inputs and buttons */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* 8. Remove animations and transitions for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+:root {
+  --font-family--gothic: "Noto Sans JP", sans-serif;
+  --font-family--roboto: "Roboto", sans-serif;
+  --color-black: #000000;
+  --color-green: #006a65;
+  --color-button-bule-green: #2fbfb8;
+  --color-button-bule-green-dark: #035c5d;
+  --color-blue: #496cc5;
+  --color-blue-dark: #2948ac;
+  --color-green-gradation-bg: #004B6A;
+  --color-green-gradation: linear-gradient(90deg, rgba(0, 75, 106, 1) 19%, rgba(49, 205, 176, 1) 100%);
+}
+
+html, body {
+  font-feature-settings: "palt";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--color-black);
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family--gothic);
+  font-size: 1.5rem;
+  font-weight: 500;
+  position: relative;
+  letter-spacing: 0.05em;
+}
+
+a {
+  color: var(--color-black);
+  text-decoration: none;
+  -moz-transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s;
+}
+a:hover {
+  color: var(--color-black);
+}
+
+p {
+  margin-bottom: 0.8em;
+}
+
+img {
+  image-rendering: -webkit-optimize-contrast;
+}
+
+input[type=submit], input[type=button], input[type=reset] {
+  border-radius: 0;
+  -webkit-box-sizing: content-box;
+  -webkit-appearance: button;
+  appearance: button;
+  border: none;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.button-hamburger {
+  display: none;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  z-index: 20;
+}
+@media only screen and (max-width: 991px) {
+  .button-hamburger {
+    display: block;
+    position: fixed;
+    right: 15px;
+  }
+}
+.button-hamburger .bar {
+  display: block;
+  width: 32px;
+  height: 3px;
+  background: var(--color-green);
+  position: absolute;
+  left: 4px;
+  -moz-transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s;
+}
+.button-hamburger .bar:nth-child(1) {
+  top: 11px;
+}
+.button-hamburger .bar:nth-child(2) {
+  top: 26px;
+}
+.button-hamburger.is-active .bar:nth-child(1) {
+  transform: rotate(45deg);
+  top: 20px;
+}
+.button-hamburger.is-active .bar:nth-child(2) {
+  transform: rotate(-45deg);
+  top: 20px;
+}
+
+@media only screen and (min-width: 991px) {
+  .sp {
+    display: none !important;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .tablet {
+    display: none !important;
+  }
+}
+
+@media only screen and (min-width: 991px) {
+  .pc {
+    display: block;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .pc {
+    display: none !important;
+  }
+}
+
+.l-header {
+  background: white;
+  border-bottom: 1px solid #1b9993;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+.l-header-inner {
+  width: 100%;
+  height: 80px;
+  margin-inline: auto;
+  padding: 0 4cqw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 270px;
+}
+@media only screen and (max-width: 1199px) {
+  .l-header-inner {
+    padding: 0 2cqw;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .l-header-inner {
+    height: 60px;
+    padding: 0 25px;
+  }
+}
+.l-header-logo {
+  margin-right: 15cqw;
+  flex-shrink: 0;
+}
+@media only screen and (max-width: 1199px) {
+  .l-header-logo {
+    margin-right: 0;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .l-header-logo picture {
+    width: 105px;
+  }
+}
+.l-header-navi {
+  z-index: 20;
+}
+@media only screen and (max-width: 991px) {
+  .l-header-navi {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: white;
+    padding: 150px 80px;
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .l-header-navi {
+    padding: 75px 40px;
+  }
+}
+.l-header-navi ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  font-size: 1.5rem;
+}
+@media only screen and (max-width: 1199px) {
+  .l-header-navi ul {
+    gap: 1em;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .l-header-navi ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3em;
+  }
+}
+.l-header-navi ul li.pc-hidden {
+  display: none;
+}
+@media only screen and (max-width: 991px) {
+  .l-header-navi ul li.pc-hidden {
+    display: block;
+  }
+}
+.l-header-navi ul li a {
+  white-space: nowrap;
+}
+@media only screen and (max-width: 991px) {
+  .l-header-navi ul li a {
+    color: var(--color-green);
+  }
+}
+@media only screen and (max-width: 991px) {
+  .l-header-navi.is-open {
+    height: auto;
+    visibility: visible;
+    opacity: 1;
+  }
+}
+.l-header-buttons {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+@media only screen and (max-width: 991px) {
+  .l-header-buttons {
+    display: none;
+  }
+}
+.l-header-button {
+  display: grid;
+  place-content: center;
+  width: 170px;
+  height: 38px;
+  border-radius: 8px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.l-header-button::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 0;
+  top: 0;
+  left: 0;
+  background: #fff;
+  -moz-transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s;
+}
+.l-header-button--contact {
+  background: var(--color-blue);
+  box-shadow: 0 4px 0 0 var(--color-blue-dark);
+}
+.l-header-button--download {
+  background: var(--color-button-bule-green);
+  box-shadow: 0 4px 0 0 var(--color-button-bule-green-dark);
+}
+.l-header-button:hover::after {
+  height: 100%;
+}
+
+.footer-cta {
+  background: var(--color-green);
+  color: white;
+  padding: 80px 0 60px;
+  position: relative;
+}
+@media only screen and (max-width: 991px) {
+  .footer-cta {
+    padding: 50px 0 20px;
+  }
+}
+.footer-cta::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: url("https://static.wixstatic.com/media/48d911_9c0f3935eacc40209123a065d3bd74d2~mv2.png") center right no-repeat;
+  background-size: 100% 100%;
+}
+@media only screen and (max-width: 991px) {
+  .footer-cta::before {
+    background: url("https://static.wixstatic.com/media/48d911_01bc2aea93fb40b087a2ac2e826bb11f~mv2.png") center right no-repeat;
+    background-size: cover;
+  }
+}
+.footer-cta__inner {
+  position: relative;
+}
+.footer-cta__title {
+  font-size: 3.2rem;
+  font-weight: bolder;
+  text-align: center;
+  margin-bottom: 70px;
+}
+@media only screen and (max-width: 991px) {
+  .footer-cta__title {
+    font-size: 2rem;
+    margin-bottom: 6px;
+  }
+}
+.footer-cta__list {
+  max-width: 1060px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+@media only screen and (max-width: 991px) {
+  .footer-cta__list {
+    grid-template-columns: 1fr;
+    place-items: center;
+  }
+}
+.footer-cta__item {
+  padding: 0 30px;
+}
+@media only screen and (max-width: 991px) {
+  .footer-cta__item {
+    width: 100%;
+    max-width: 300px;
+    padding: 30px 0;
+  }
+}
+.footer-cta__item:nth-child(n+2) {
+  border-left: 1px solid #1b9993;
+}
+@media only screen and (max-width: 991px) {
+  .footer-cta__item:nth-child(n+2) {
+    border-left: none;
+    border-top: 1px solid #1b9993;
+  }
+}
+
+@media only screen and (max-width: 1199px) {
+  .l-container.footer-cta__inner, .l-container.company {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+.c-cta-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.c-cta-card__header {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  height: 100px;
+  margin-bottom: 60px;
+}
+@media only screen and (max-width: 991px) {
+  .c-cta-card__header {
+    gap: 20px;
+    align-self: flex-start;
+    margin-bottom: 30px;
+    height: auto;
+  }
+}
+.c-cta-card__image {
+  display: grid;
+  place-content: center;
+  width: 78px;
+}
+@media only screen and (max-width: 991px) {
+  .c-cta-card__image {
+    width: 60px;
+  }
+}
+.c-cta-card__image--demo img {
+  width: 65px;
+}
+@media only screen and (max-width: 991px) {
+  .c-cta-card__image--demo img {
+    width: 48.5px;
+  }
+}
+.c-cta-card__image--contact img {
+  width: 100%;
+}
+@media only screen and (max-width: 991px) {
+  .c-cta-card__image--contact img {
+    width: 59px;
+  }
+}
+.c-cta-card__image--dl img {
+  width: 73px;
+}
+@media only screen and (max-width: 991px) {
+  .c-cta-card__image--dl img {
+    width: 54px;
+  }
+}
+.c-cta-card__title {
+  font-size: 2rem;
+  font-weight: bolder;
+  line-height: 1.6;
+}
+@media only screen and (max-width: 991px) {
+  .c-cta-card__title {
+    font-size: 1.7rem;
+  }
+}
+.c-cta-card__desc {
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 32px;
+}
+@media only screen and (max-width: 991px) {
+  .c-cta-card__desc {
+    margin-bottom: 16px;
+  }
+}
+.c-cta-card__button {
+  margin-top: auto;
+  display: grid;
+  place-content: center;
+  width: 100%;
+  height: 60px;
+  border-radius: 10px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: white;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+.c-cta-card__button::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 0;
+  top: 0;
+  left: 0;
+  background: #fff;
+  -moz-transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s;
+}
+.c-cta-card__button--demo {
+  background: #16b267;
+  box-shadow: 0 4px 0 0 #055028;
+}
+.c-cta-card__button--contact {
+  background: var(--color-blue);
+  box-shadow: 0 4px 0 0 var(--color-blue-dark);
+}
+.c-cta-card__button--download {
+  background: var(--color-button-bule-green);
+  box-shadow: 0 4px 0 0 var(--color-button-bule-green-dark);
+}
+.c-cta-card__button:hover::after {
+  height: 100%;
+}
+
+.l-footer-navi {
+  background: var(--color-green);
+  width: 100%;
+  display: grid;
+  place-content: center;
+  padding: 20px 25px;
+}
+.l-footer-navi ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.4em 2em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.l-footer-navi ul li a {
+  color: white;
+}
+.l-footer-navi ul li a:hover {
+  color: #10f16f;
+}
+.l-footer .company {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  height: 120px;
+  padding-bottom: 32px;
+  position: relative;
+}
+@media only screen and (max-width: 991px) {
+  .l-footer .company {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    padding-bottom: 18px;
+  }
+}
+.l-footer .company-header {
+  display: flex;
+  align-items: flex-end;
+}
+@media only screen and (max-width: 991px) {
+  .l-footer .company-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .l-footer .company-logo {
+    width: 111px;
+  }
+}
+.l-footer .company-name {
+  font-size: 2rem;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 8px;
+}
+@media only screen and (max-width: 991px) {
+  .l-footer .company-name {
+    font-size: 1.5rem;
+  }
+}
+.l-footer .company-link {
+  display: flex;
+  gap: 3em;
+  margin-bottom: 13px;
+}
+@media only screen and (max-width: 991px) {
+  .l-footer .company-link {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5em;
+    margin-bottom: 0;
+  }
+}
+.l-footer .company-link a {
+  font-size: 1.2rem;
+  color: #333333;
+}
+.l-footer .company-link a:hover {
+  color: black;
+}
+.l-footer .company-copyright {
+  font-size: 1.2rem;
+  color: #333333;
+  position: absolute;
+  right: 70px;
+  bottom: 10px;
+}
+@media only screen and (max-width: 991px) {
+  .l-footer .company-copyright {
+    display: none;
+  }
+}
+
+.l-sub-links {
+  background: #f5f5f5;
+  overflow: hidden;
+}
+.l-sub-links__list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3em;
+  padding: 0 20px;
+  margin: 20px auto;
+  list-style: none;
+}
+@media only screen and (max-width: 991px) {
+  .l-sub-links__list {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1em;
+    max-width: 740px;
+    padding: 0 30px;
+    margin-inline: auto;
+  }
+}
+.l-sub-links__item a {
+  font-size: 1.2rem;
+  color: #333333;
+}
+.l-sub-links__item a:hover {
+  color: black;
+}
+.l-sub-links__copyright {
+  display: none;
+}
+@media only screen and (max-width: 991px) {
+  .l-sub-links__copyright {
+    display: block;
+    font-size: 1.2rem;
+    color: #333333;
+    max-width: 740px;
+    padding: 0 30px 30px;
+    margin-inline: auto;
+  }
+}
+
+.section-header .section-title {
+  font-size: 3rem;
+  text-align: center;
+  color: black;
+  position: relative;
+  padding-top: 1.2333em;
+  padding-bottom: 1em;
+}
+@media only screen and (max-width: 991px) {
+  .section-header .section-title {
+    font-size: 1.9rem;
+  }
+}
+.section-header .section-title::before {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--color-green);
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+}
+@media only screen and (max-width: 991px) {
+  .section-header .section-title::before {
+    width: 50px;
+    height: 5px;
+  }
+}
+.section-header .section-title__sub {
+  display: block;
+  font-size: 0.6666em;
+}
+
+.l-container {
+  width: 100%;
+  max-width: 1200px;
+  padding-left: 70px;
+  padding-right: 70px;
+  margin-inline: auto;
+}
+@media only screen and (max-width: 991px) {
+  .l-container {
+    max-width: 740px;
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+}
+
+.main-visual {
+  width: 100%;
+  background: var(--color-green);
+  position: relative;
+  margin-top: 80px;
+  margin-bottom: 100px;
+}
+@media only screen and (max-width: 991px) {
+  .main-visual {
+    margin-top: 60px;
+    margin-bottom: 50px;
+  }
+}
+.main-visual::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: url("https://static.wixstatic.com/media/48d911_00722b9d5c9248dfb406bc503297e295~mv2.png") center right no-repeat;
+  background-size: 100% 100%;
+}
+@media only screen and (max-width: 1199px) {
+  .main-visual::before {
+    background-size: auto 100%;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .main-visual::before {
+    background: url("https://static.wixstatic.com/media/48d911_f7394e07cf524e479162c1bfd34856fa~mv2.jpg") center center no-repeat;
+    background-size: cover;
+  }
+}
+.main-visual::after {
+  content: "";
+  display: block;
+  width: 474px;
+  height: 100%;
+  position: absolute;
+  top: 15px;
+  right: 30px;
+  background: url("https://static.wixstatic.com/media/48d911_215c70150a2d4bfc9333ad1b79f7bc2c~mv2.png") center top no-repeat;
+  background-size: contain;
+}
+@media only screen and (max-width: 991px) {
+  .main-visual::after {
+    width: 237px;
+    height: 237px;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+.main-visual-inner {
+  max-width: 1360px;
+  padding: 0 30px 40px;
+  margin-inline: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  position: relative;
+  container-type: inline-size;
+  z-index: 1;
+}
+@media only screen and (max-width: 991px) {
+  .main-visual-inner {
+    flex-direction: column;
+    gap: 15px;
+    padding: 0 35px 230px;
+  }
+}
+.main-visual-main {
+  padding-top: 50px;
+}
+@media only screen and (max-width: 1199px) {
+  .main-visual-main {
+    flex: 1;
+  }
+}
+.main-visual-image {
+  padding-top: 82px;
+}
+@media only screen and (max-width: 1199px) {
+  .main-visual-image {
+    flex: 1;
+    padding-top: 0;
+  }
+}
+.main-visual-image img {
+  width: clamp(229px, 42cqw, 532px);
+}
+@media only screen and (max-width: 991px) {
+  .main-visual-image img {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+.main-visual-tab {
+  display: inline-block;
+  font-size: clamp(14px, 1.7cqw, 22px);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--color-green);
+  background: white;
+  padding: 10px 20px;
+  margin-bottom: 36px;
+  border-radius: 0 16px 0 0;
+}
+@media only screen and (max-width: 991px) {
+  .main-visual-tab {
+    font-size: 1.4rem;
+    border-radius: 0 8px 0 0;
+    margin-bottom: 10px;
+    padding: 6px 15px;
+  }
+}
+.main-visual-title {
+  text-align: center;
+  margin-bottom: 52px;
+}
+@media only screen and (max-width: 991px) {
+  .main-visual-title {
+    width: 100%;
+    max-width: 150px;
+    margin-inline: auto;
+    margin-bottom: 10px;
+  }
+}
+.main-visual-title img {
+  display: inline-block;
+}
+.main-visual-desc {
+  font-size: clamp(18px, 2.45cqw, 32px);
+  font-weight: 600;
+  line-height: 2;
+  color: white;
+  margin-bottom: 48px;
+  display: block;
+}
+@media only screen and (max-width: 991px) {
+  .main-visual-desc {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+}
+.main-visual-desc .break {
+  display: inline-block;
+}
+.main-visual-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  z-index: 15;
+}
+@media only screen and (max-width: 991px) {
+  .main-visual-buttons {
+    position: absolute;
+    left: 50%;
+    bottom: 47px;
+    transform: translateX(-50%);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+.main-visual-button {
+  display: grid;
+  place-content: center;
+  width: 280px;
+  height: 58px;
+  border-radius: 8px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: white;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+.main-visual-button::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 0;
+  top: 0;
+  left: 0;
+  background: #fff;
+  -moz-transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s;
+}
+.main-visual-button--contact {
+  background: var(--color-blue);
+  box-shadow: 0 4px 0 0 var(--color-blue-dark);
+}
+.main-visual-button--download {
+  background: var(--color-button-bule-green);
+  box-shadow: 0 4px 0 0 var(--color-button-bule-green-dark);
+}
+.main-visual-button:hover::after {
+  height: 100%;
+}
+
+.problem {
+  margin-bottom: 80px;
+}
+@media only screen and (max-width: 991px) {
+  .problem {
+    margin-bottom: 50px;
+  }
+}
+.problem-list {
+  padding: 0 10px;
+  margin: 0 auto;
+  list-style: none;
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+@media only screen and (max-width: 991px) {
+  .problem-list {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+}
+.problem-card__image img {
+  display: block;
+  margin-inline: auto;
+  margin-bottom: 24px;
+}
+@media only screen and (max-width: 991px) {
+  .problem-card__image img {
+    margin-bottom: 20px;
+  }
+}
+.problem-card__title {
+  font-size: 2.2rem;
+  text-align: center;
+  line-height: 1.4;
+  margin-bottom: 16px;
+}
+.problem-card__text {
+  font-size: 1.6rem;
+  line-height: 2;
+}
+@media only screen and (max-width: 991px) {
+  .problem-card__text {
+    font-size: 1.5rem;
+  }
+}
+
+.feature {
+  margin-bottom: 85px;
+}
+@media only screen and (max-width: 991px) {
+  .feature {
+    margin-bottom: 50px;
+  }
+}
+
+.feature-desc {
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: var(--color-green);
+  text-align: center;
+}
+@media only screen and (max-width: 991px) {
+  .feature-desc {
+    font-size: 1.7rem;
+  }
+}
+
+.feature-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+@media only screen and (max-width: 991px) {
+  .feature-list {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    width: 100%;
+    max-width: 610px;
+    margin-inline: auto;
+  }
+}
+
+.c-feature-card, .c-feature-card-lg {
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 0 0 #c5dfd8;
+  display: flex;
+  flex-direction: column;
+}
+@media only screen and (max-width: 991px) {
+  .c-feature-card, .c-feature-card-lg {
+    border-radius: 5px;
+    box-shadow: 0 3px 0 0 #c5dfd8;
+  }
+}
+.c-feature-card__title, .c-feature-card-lg__title {
+  background: var(--color-green-gradation-bg);
+  background: var(--color-green-gradation);
+  font-weight: bolder;
+  text-align: center;
+  color: white;
+}
+.c-feature-card__body, .c-feature-card-lg__body {
+  border-style: solid;
+  border-color: #c5dfd8;
+  border-width: 0 2px 2px 2px;
+  flex: 1;
+}
+@media only screen and (max-width: 991px) {
+  .c-feature-card__body, .c-feature-card-lg__body {
+    border-width: 0 1px 1px 1px;
+  }
+}
+.c-feature-card__image, .c-feature-card-lg__image {
+  text-align: center;
+}
+.c-feature-card__image img, .c-feature-card-lg__image img {
+  display: block;
+  margin: auto;
+}
+.c-feature-card p, .c-feature-card-lg p {
+  font-size: 1.6rem;
+  line-height: 2;
+  margin-bottom: 0;
+}
+@media only screen and (max-width: 991px) {
+  .c-feature-card p, .c-feature-card-lg p {
+    font-size: 1.5rem;
+  }
+}
+
+.c-feature-card__title {
+  display: grid;
+  place-content: center;
+  font-size: 2rem;
+  height: 90px;
+}
+.c-feature-card__body {
+  padding: 20px 25px 25px;
+}
+@media only screen and (max-width: 991px) {
+  .c-feature-card__body {
+    padding: 30px 25px 40px;
+  }
+}
+.c-feature-card__image {
+  height: 90px;
+  margin-bottom: 30px;
+}
+
+.c-feature-card-lg {
+  width: 100%;
+  max-width: 610px;
+  margin-inline: auto;
+  margin-bottom: 50px;
+}
+@media only screen and (max-width: 991px) {
+  .c-feature-card-lg {
+    margin-bottom: 30px;
+  }
+}
+.c-feature-card-lg__title {
+  font-size: 3rem;
+  padding: 9px;
+}
+@media only screen and (max-width: 991px) {
+  .c-feature-card-lg__title {
+    display: grid;
+    place-content: center;
+    font-size: 2rem;
+    height: 90px;
+  }
+}
+.c-feature-card-lg__body {
+  padding: 25px 30px 30px;
+}
+@media only screen and (max-width: 991px) {
+  .c-feature-card-lg__body {
+    padding: 20px 25px 40px;
+  }
+}
+.c-feature-card-lg__image {
+  padding-right: 5em;
+  margin-bottom: 40px;
+}
+@media only screen and (max-width: 991px) {
+  .c-feature-card-lg__image {
+    height: 105px;
+    margin-bottom: 30px;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .c-feature-card-lg__image img {
+    max-height: 100%;
+  }
+}
+
+.function {
+  background: #f2f8fa;
+  border-radius: 50px;
+  margin: 0 50px 85px;
+  padding: 80px 0 20px;
+}
+@media only screen and (max-width: 991px) {
+  .function {
+    border-radius: 0;
+    margin: 0 0 50px;
+    padding: 50px 0 20px;
+  }
+}
+.function-block__line {
+  background: var(--color-green-gradation-bg);
+  background: var(--color-green-gradation);
+  display: grid;
+  place-content: center;
+  width: 100%;
+  height: 36px;
+  border-radius: 3px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 1.8em;
+}
+@media only screen and (max-width: 991px) {
+  .function-block__line {
+    height: 28px;
+    border-radius: 3px;
+    font-size: 1.4rem;
+  }
+}
+.function-block__title {
+  font-size: 3.4rem;
+  text-align: center;
+  color: black;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+@media only screen and (max-width: 991px) {
+  .function-block__title {
+    font-size: 2rem;
+  }
+}
+.function-block__desc {
+  text-align: center;
+  line-height: 2;
+  margin-bottom: 2em;
+}
+@media only screen and (max-width: 991px) {
+  .function-block__desc {
+    font-size: 1.4rem;
+  }
+}
+.function-list {
+  margin-bottom: 60px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 20px;
+}
+@media only screen and (max-width: 991px) {
+  .function-list {
+    margin-bottom: 30px;
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+}
+.function-item {
+  position: relative;
+  padding: 0 25px 40px;
+}
+@media only screen and (max-width: 991px) {
+  .function-item {
+    padding: 0 22.5px 25px;
+  }
+}
+.function-item::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: calc(100% - 80px);
+  background: white;
+  border-radius: 10px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+@media only screen and (max-width: 991px) {
+  .function-item::before {
+    border-radius: 5px;
+  }
+}
+.function-item__image {
+  position: relative;
+}
+.function-item__image img {
+  display: block;
+  margin: auto;
+}
+.function-item__title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--color-green);
+  text-align: center;
+  padding: 1.4em 0 0.7em;
+  margin: 0;
+  position: relative;
+}
+.function-item__title span {
+  display: block;
+  font-size: 1.6rem;
+}
+.function-item__desc {
+  line-height: 2;
+  position: relative;
+}
+
+.logo-marquee {
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 65px;
+}
+@media only screen and (max-width: 991px) {
+  .logo-marquee {
+    margin-bottom: 27px;
+  }
+}
+
+.logo-marquee__inner {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content; /* 画像の幅に合わせる */
+  animation: logo-marquee 160s linear infinite;
+}
+
+.logo-marquee__image {
+  display: block;
+  flex-shrink: 0;
+  height: 125px;
+}
+@media only screen and (max-width: 991px) {
+  .logo-marquee__image {
+    height: 62.5px;
+  }
+}
+
+/* スクロールアニメーション */
+@keyframes logo-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* 2枚中1枚分（=全体の半分）だけ左へスライド */
+    transform: translateX(-50%);
+  }
+}
+/* 動きに弱い人向け：OS設定でアニメ減らしてるときは停止 */
+@media (prefers-reduced-motion: reduce) {
+  .logo-marquee__inner {
+    animation: none;
+  }
+}
+.cases {
+  display: grid;
+  gap: 50px;
+  margin-bottom: 100px;
+}
+@media only screen and (max-width: 991px) {
+  .cases {
+    gap: 30px;
+    margin-bottom: 50px;
+  }
+}
+
+.case-block {
+  background: #f2f8fa;
+  border: 2px solid #c5dfd8;
+  border-radius: 10px;
+  box-shadow: 0 5px 0 0 #c5dfd8;
+  padding: 40px 45px 25px;
+  position: relative;
+  overflow: hidden;
+}
+@media only screen and (max-width: 991px) {
+  .case-block {
+    padding: 30px 22.5px;
+    border-width: 1px;
+    border-radius: 5px;
+    box-shadow: 0 2.5px 0 0 #c5dfd8;
+  }
+}
+.case-block__num {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #1b9993;
+  display: grid;
+  place-content: center;
+  border-radius: 0 0 20px 0;
+  width: 58px;
+  height: 70px;
+  font-size: 1.5rem;
+  color: white;
+  text-align: center;
+}
+@media only screen and (max-width: 991px) {
+  .case-block__num {
+    display: none;
+  }
+}
+.case-block__title {
+  font-size: 2.6rem;
+  text-align: center;
+  margin-bottom: 1.3em;
+}
+@media only screen and (max-width: 991px) {
+  .case-block__title {
+    font-size: 2rem;
+  }
+}
+.case-block__container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 10px 40px;
+}
+@media only screen and (max-width: 991px) {
+  .case-block__container {
+    grid-template-columns: 1fr;
+  }
+}
+.case-block__header p {
+  line-height: 2;
+  margin-bottom: 0;
+}
+@media only screen and (max-width: 991px) {
+  .case-block__header p {
+    font-size: 1.2rem;
+  }
+}
+.case-block__main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px 35px;
+}
+@media only screen and (max-width: 991px) {
+  .case-block__main {
+    grid-template-columns: 1fr;
+  }
+}
+.case-block__image {
+  margin-bottom: 20px;
+}
+@media only screen and (max-width: 991px) {
+  .case-block__image {
+    margin-bottom: 12px;
+  }
+}
+.case-block__image img {
+  display: block;
+}
+@media only screen and (max-width: 991px) {
+  .case-block__image img {
+    width: 100%;
+  }
+}
+.case-block__client {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+@media only screen and (max-width: 991px) {
+  .case-block__client {
+    font-size: 1.4rem;
+  }
+}
+.case-block__before, .case-block__after {
+  background: white;
+  border-radius: 4px;
+  position: relative;
+}
+@media only screen and (max-width: 991px) {
+  .case-block__before, .case-block__after {
+    border-radius: 2px;
+  }
+}
+.case-block__before-title, .case-block__after-title {
+  display: grid;
+  place-content: center;
+  width: 100%;
+  height: 36px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  border-radius: 4px 4px 0 0;
+}
+@media only screen and (max-width: 991px) {
+  .case-block__before-title, .case-block__after-title {
+    font-size: 1.3rem;
+    height: 27px;
+    border-radius: 2px 2px 0 0;
+  }
+}
+.case-block__before-content, .case-block__after-content {
+  padding: 15px;
+  font-size: 1.6rem;
+  line-height: 2;
+}
+@media only screen and (max-width: 991px) {
+  .case-block__before-content, .case-block__after-content {
+    font-size: 1.3rem;
+  }
+}
+.case-block__before-title {
+  border: 1px solid #98a9b0;
+}
+.case-block__before::after {
+  content: "";
+  display: block;
+  width: 19px;
+  height: 19px;
+  background: url("https://static.wixstatic.com/media/48d911_548a164876e64bdb80bafe194963fc62~mv2.png") center center no-repeat;
+  background-size: contain;
+  position: absolute;
+  top: 8px;
+  left: calc(100% + 8px);
+}
+@media only screen and (max-width: 991px) {
+  .case-block__before::after {
+    transform: rotate(90deg);
+    width: 20px;
+    height: 20px;
+    top: calc(100% + 5px);
+    left: calc(50% - 10px);
+  }
+}
+.case-block__after-title {
+  background: var(--color-green-gradation-bg);
+  background: var(--color-green-gradation);
+  color: white;
+}
+
+.faq {
+  margin-bottom: 85px;
+}
+@media only screen and (max-width: 991px) {
+  .faq {
+    margin-bottom: 50px;
+  }
+}
+.faq .l-container {
+  max-width: 1110px;
+}
+
+.faq-tabs {
+  border-bottom: 2px solid var(--color-green);
+  margin-bottom: 48px;
+}
+@media only screen and (max-width: 991px) {
+  .faq-tabs {
+    border-bottom: none;
+    margin-bottom: 25px;
+  }
+}
+.faq-tabs__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+@media only screen and (max-width: 991px) {
+  .faq-tabs__list {
+    flex-direction: column;
+  }
+}
+.faq-tabs__item button {
+  display: grid;
+  place-content: center;
+  width: 200px;
+  height: 70px;
+  background: white;
+  font-weight: 600;
+  color: var(--color-green);
+  border: 1px solid var(--color-green);
+  border-radius: 10px 10px 0 0;
+  cursor: pointer;
+}
+@media only screen and (max-width: 991px) {
+  .faq-tabs__item button {
+    width: 100%;
+    height: 35px;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    background: #f2f8fa;
+  }
+}
+.faq-tabs__item button:hover {
+  background: var(--color-green);
+  color: white;
+  -moz-transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s;
+}
+.faq-tabs__item.is-active button {
+  background: var(--color-green);
+  color: white;
+}
+
+.faq-group {
+  display: none;
+}
+
+.faq-group:first-child {
+  display: block;
+}
+
+.faq-item {
+  margin-bottom: 30px;
+}
+.faq-item__summary {
+  border: 1px solid #1b9993;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 20px 25px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-green);
+  cursor: pointer;
+  position: relative;
+}
+@media only screen and (max-width: 991px) {
+  .faq-item__summary {
+    display: block;
+    font-size: 1.5rem;
+    border-radius: 5px;
+  }
+}
+.faq-item__summary::marker {
+  display: none;
+}
+.faq-item__q-label {
+  width: 42px;
+  height: 30px;
+  display: grid;
+  place-content: center;
+  background: var(--color-green);
+  border-radius: 4px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: white;
+}
+@media only screen and (max-width: 991px) {
+  .faq-item__q-label {
+    border-radius: 2px;
+    margin-bottom: 1em;
+  }
+}
+.faq-item__icon {
+  width: 1em;
+  height: 1em;
+  font-size: 3rem;
+  display: grid;
+  place-content: center;
+  position: absolute;
+  right: 10px;
+  top: 0.66em;
+}
+.faq-item__icon::before {
+  content: "+";
+}
+.faq-item__answer {
+  display: flex;
+  gap: 22px;
+  padding: 0 25px;
+  margin-top: 20px;
+  overflow: hidden;
+}
+@media only screen and (max-width: 991px) {
+  .faq-item__answer {
+    display: block;
+  }
+}
+.faq-item__answer p {
+  font-size: 1.6rem;
+  line-height: 2;
+  margin-bottom: 0;
+}
+@media only screen and (max-width: 991px) {
+  .faq-item__answer p {
+    font-size: 1.5rem;
+  }
+}
+.faq-item__a-label {
+  flex-shrink: 0;
+  width: 42px;
+  height: 30px;
+  display: grid;
+  place-content: center;
+  border: 1px solid var(--color-green);
+  border-radius: 4px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-green);
+}
+@media only screen and (max-width: 991px) {
+  .faq-item__a-label {
+    border-radius: 2px;
+    margin-bottom: 1em;
+  }
+}
+
+details[open] .faq-item__icon {
+  top: 0.5em;
+}
+details[open] .faq-item__icon::before {
+  content: "-";
+}
+
+    </style>
+</head>
+<body>
+<div class="l-header">
+    <div class="l-header-inner">
+        <div class="l-header-logo">
+            <picture>
+                <source srcset="https://static.wixstatic.com/media/48d911_b674e45348b84f128332078951a8c0a0~mv2.png 2x,https://static.wixstatic.com/media/48d911_1b721c2abda3441987ee918382ff76ed~mv2.png 1x">
+                <img src="https://static.wixstatic.com/media/48d911_1b721c2abda3441987ee918382ff76ed~mv2.png" alt="Fleaciaロゴ">
+            </picture>
+        </div>
+        <!-- <div class="l-header-navi">
+            <ul>
+                <li>
+                    <a href="#section-problem">解決できる課題</a>
+                </li>
+                <li>
+                    <a href="#section-feature">製品の特徴</a>
+                </li>
+                <li>
+                    <a href="#section-function">機能</a>
+                </li>
+                <li>
+                    <a href="#section-case">導入事例</a>
+                </li>
+                <li>
+                    <a href="#section-faq">FAQ</a>
+                </li>
+                <li class="pc-hidden">
+                    <a href="https://www.future-artisan.co.jp/contact/Fleacia_demo" target="_blank">無料デモ依頼</a></li>
+                <li class="pc-hidden">
+                    <a href="https://www.future-artisan.co.jp/resources/FleaciaCPQ_DL" target="_blank">資料のダウンロード</a></li>
+                <li class="pc-hidden">
+                    <a href="https://www.future-artisan.co.jp/contact/fleacia" target="_blank">導入のご相談・お問い合わせ</a></li>
+            </ul>
+        </div> -->
+        <div class="l-header-buttons">
+            <a href="https://www.future-artisan.co.jp/contact/fleacia" class="l-header-button l-header-button--contact" target="_blank">お問い合わせ</a>
+            <a href="https://www.future-artisan.co.jp/resources/FleaciaCPQ_DL" class="l-header-button l-header-button--download" target="_blank">資料のダウンロード</a>
+        </div>
+        <!-- <button id="js-hamburger-button" class="button-hamburger">
+            <span class="bar"></span><span class="bar"></span>
+        </button> -->
+    </div>
+</div>
+<section class="main-visual">
+    <div class="main-visual-inner">
+        <div class="main-visual-main">
+            <div class="main-visual-tab">
+                個別受注型製造業向けのCPQ
+            </div>
+            <div class="main-visual-desc">
+                営業と設計をつなぎ、見積を速く、<span class="break">正しく、誰でも</span><br>
+                <span class="break">製造業のための国産CPQ</span>
+            </div>
+            <h1 class="main-visual-title">
+                <img src="https://static.wixstatic.com/media/48d911_489e456173e64427b788eaed5b3600e8~mv2.png" alt="Fleacia">
+            </h1>
+            <div class="main-visual-buttons">
+                <a href="https://www.future-artisan.co.jp/contact/fleacia" class="main-visual-button main-visual-button--contact" target="_blank">
+                    導入に関するご相談はこちら
+                </a>
+                <a href="https://www.future-artisan.co.jp/resources/FleaciaCPQ_DL" class="main-visual-button main-visual-button--download" target="_blank">
+                    資料のダウンロードはこちら
+                </a>
+            </div>
+        </div>
+        <div class="main-visual-image">
+            <img src="https://static.wixstatic.com/media/48d911_a8d4223449bf4799bc48302d7ca601c8~mv2.png" alt="ノートパソコンと製機械">
+        </div>
+    </div>
+</section>
+
+<section id="section-problem" class="problem">
+    <div class="l-container">
+        <div class="section-header">
+            <h2 class="section-title">
+                Flaecia CPQ が解決できる課題
+            </h2>
+        </div>
+        <ul class="problem-list">
+
+            <!-- 01 -->
+            <li class="problem-item">
+                <article class="problem-card">
+                    <div class="problem-card__image">
+                        <img src="https://static.wixstatic.com/media/48d911_3b5cd5faa99c434399c4ee5b66f18959~mv2.png"
+                             alt="技術計算・制約処理の対応イメージ">
+                    </div>
+                    <h3 class="problem-card__title">
+                        複雑な仕様排他や設計計算処理<br>にも対応できる
+                    </h3>
+                    <p class="problem-card__text">
+                        複雑な仕様の製品であっても、Fleaciaなら対応できます。
+                        システムに製品の仕様を合わせる必要もありません。
+                        システム導入のためのサポートもお任せください。
+                    </p>
+                </article>
+            </li>
+
+            <!-- 02 -->
+            <li class="problem-item">
+                <article class="problem-card">
+                    <div class="problem-card__image">
+                        <img src="https://static.wixstatic.com/media/48d911_0b4edc027b7541508ab0f482d0517e4e~mv2.png"
+                             alt="標準化せずに導入できるイメージ">
+                    </div>
+                    <h3 class="problem-card__title">
+                        製品（モノ）の標準化を<br>しなくても導入できる
+                    </h3>
+                    <p class="problem-card__text">
+                        見積のデジタル化（CPQ導入）のために製品ラインナップを狭めて、もともとの強みであった 「顧客対応力」を損なっては意味がありません。 標準化・モジュール化が難しい製品でも、提案を標準化できる独自方法論と機能がFleaciaには備わっています。
+                    </p>
+                </article>
+            </li>
+
+            <!-- 03 -->
+            <li class="problem-item">
+                <article class="problem-card">
+                    <div class="problem-card__image">
+                        <img src="https://static.wixstatic.com/media/48d911_1ff09a39d8d848f4bb570b3020e08991~mv2.png"
+                             alt="海外営業や代理店との連携イメージ">
+                    </div>
+                    <h3 class="problem-card__title">
+                        海外営業や代理店への<br>展開もできる
+                    </h3>
+                    <p class="problem-card__text">
+                        FleaciaはSaaS型のため、オンラインでの共有・展開が容易で、海外拠点や代理店、さらにはグローバルにエンドユーザーへセルフ見積を提供することも可能です。
+                    </p>
+                </article>
+            </li>
+
+        </ul>
+    </div>
+</section>
+
+<section id="section-feature" class="feature">
+    <div class="l-container">
+        <div class="section-header">
+            <h2 class="section-title">
+                Flaecia CPQ の特徴
+            </h2>
+        </div>
+        <p class="feature-desc">
+            営業設計の効率化を進め
+        </p>
+        <div class="c-feature-card-lg">
+            <div class="c-feature-card-lg__title">
+                属人化をなくすことができる
+            </div>
+            <div class="c-feature-card-lg__body">
+                <div class="c-feature-card-lg__image">
+                    <img src="https://static.wixstatic.com/media/48d911_9a8f723b08094a5c8b265e91b393e301~mv2.png" alt="CPQイメージ図">
+                </div>
+                <p>
+                    ベテランの見積・仕様確定プロセスをWeb上で一元管理でき、若手でも同じ判断ができる環境を構築。これにより「見積作業を誰でも再現可能にする」＝ノウハウの資産化・継承を実現します。
+                </p>
+            </div>
+        </div>
+        <div class="feature-list">
+            <div class="c-feature-card">
+                <div class="c-feature-card__title">
+                    見積スピードを飛躍的に<br>
+                    上げることができる
+                </div>
+                <div class="c-feature-card__body">
+                    <div class="c-feature-card__image">
+                        <img src="https://static.wixstatic.com/media/48d911_792ed52d2ebf4b23942af93f0c9b3858~mv2.png" alt="国産のCPQイメージ図">
+                    </div>
+                    <p>
+                        競合に先を越されることがなくなり、スピードという競争優位を手に入れることができます。さらに、Webベースの仕組みにより、海外拠点・代理店も同一環境でリアルタイム対応が可能です。
+                    </p>
+                </div>
+            </div>
+
+            <div class="c-feature-card">
+                <div class="c-feature-card__title">
+                    簡単に導入でき、小さく、<br>
+                    最低限の初期投資で始められる
+                </div>
+                <div class="c-feature-card__body">
+                    <div class="c-feature-card__image">
+                        <img src="https://static.wixstatic.com/media/48d911_9b558779b5a949c0834029efa3ce71c9~mv2.png" alt="受注設計">
+                    </div>
+                    <p>
+                        導入に向けたきめ細かいサポート（伴走体制）が整えております。小さく始めて育てていくというコンセプトのCPQのため、スモールスタートができます。一旦データを入れてみて動作確認するなど、PoCから始めることも可能です。
+                    </p>
+                </div>
+            </div>
+
+            <div class="c-feature-card">
+                <div class="c-feature-card__title">
+                    受注設計ノウハウを可視化する<br>
+                    方法論が組み込まれている
+                </div>
+                <div class="c-feature-card__body">
+                    <div class="c-feature-card__image">
+                        <img src="https://static.wixstatic.com/media/48d911_143ebcb6979a4eb28cbc927f140d4ad9~mv2.png" alt="SaaS型CPQイメージ図">
+                    </div>
+                    <p>
+                        当社は、もともと受注設計のノウハウを体系的に整理・可視化するコンサルティングを行っており、その実績をもとにCPQ導入を支援しています。属人的な設計判断や見積プロセスを明確化し、標準化と特注対応の両立によって、製造業のDXを実現します。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="section-function" class="function">
+    <div class="l-container">
+        <div class="section-header">
+            <h2 class="section-title">
+                Flaecia CPQ の主な機能
+            </h2>
+        </div>
+        <div class="function-block">
+            <div class="function-block__line">
+                受注業務の標準化を支援
+            </div>
+            <h3 class="function-block__title">
+                営業職・設計者でも、提案/見積で<br class="sp">活用可能
+            </h3>
+            <p class="function-block__desc">
+                若手でも、海外でも、設計なしでも、レベルの高い提案・見積ができるようになります。
+            </p>
+            <div class="function-list">
+                <div class="function-item">
+                    <div class="function-item__image">
+                        <img src="https://static.wixstatic.com/media/48d911_c3bb249fa29e4b9f89ff79661d846f3b~mv2.png" alt="Flaecia CPQ 画面">
+                    </div>
+                    <div class="function-item__title">
+                        案件管理、検索
+                    </div>
+                    <p class="function-item__desc">
+                        組織毎に提案内容を整理して、選定した結果を版管理することができます。<br>
+                        過去の案件を検索し、コピー再利用が可能です。
+                    </p>
+                </div>
+                <div class="function-item">
+                    <div class="function-item__image">
+                        <img src="https://static.wixstatic.com/media/48d911_1423428bc10e448b906d784abe57792b~mv2.png" alt="Flaecia CPQ 画面">
+                    </div>
+                    <div class="function-item__title">
+                        案件管理、検索
+                    </div>
+                    <p class="function-item__desc">
+                        組織毎に提案内容を整理して、選定した結果を版管理することができます。<br>
+                        過去の案件を検索し、コピー再利用が可能です。
+                    </p>
+                </div>
+                <div class="function-item">
+                    <div class="function-item__image">
+                        <img src="https://static.wixstatic.com/media/48d911_511a4e8d49bd4fc5870f97d5ce5ed296~mv2.png" alt="Flaecia CPQ 画面">
+                    </div>
+                    <div class="function-item__title">
+                        案件管理、検索
+                    </div>
+                    <p class="function-item__desc">
+                        組織毎に提案内容を整理して、選定した結果を版管理することができます。<br>
+                        過去の案件を検索し、コピー再利用が可能です。
+                    </p>
+                </div>
+                <div class="function-item">
+                    <div class="function-item__image">
+                        <img src="https://static.wixstatic.com/media/48d911_82b0f16a6bc34997bd8ba098b4fed8c6~mv2.png" alt="Flaecia CPQ 画面">
+                    </div>
+                    <div class="function-item__title">
+                        案件管理、検索
+                    </div>
+                    <p class="function-item__desc">
+                        組織毎に提案内容を整理して、選定した結果を版管理することができます。<br>
+                        過去の案件を検索し、コピー再利用が可能です。
+                    </p>
+                </div>
+                <div class="function-item">
+                    <div class="function-item__image">
+                        <img src="https://static.wixstatic.com/media/48d911_66b89fa50a3a469794303c223b1e0ac0~mv2.png" alt="Flaecia CPQ 画面">
+                    </div>
+                    <div class="function-item__title">
+                        案件管理、検索
+                    </div>
+                    <p class="function-item__desc">
+                        組織毎に提案内容を整理して、選定した結果を版管理することができます。<br>
+                        過去の案件を検索し、コピー再利用が可能です。
+                    </p>
+                </div>
+                <div class="function-item">
+                    <div class="function-item__image">
+                        <img src="https://static.wixstatic.com/media/48d911_999a45f8be6a4f80ad55448e552c2997~mv2.png" alt="Flaecia CPQ 画面">
+                    </div>
+                    <div class="function-item__title">
+                        案件管理、検索
+                    </div>
+                    <p class="function-item__desc">
+                        組織毎に提案内容を整理して、選定した結果を版管理することができます。<br>
+                        過去の案件を検索し、コピー再利用が可能です。
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="function-block">
+            <div class="function-block__line">
+                Web上のFleacia CPQデータの有効利用
+            </div>
+            <h3 class="function-block__title">
+                Web公開、インターネット上で<br class="sp">お客様がセルフサービスで選定
+            </h3>
+            <p class="function-block__desc">
+                顧客要求から選定、推奨へのガイド、必要に応じて見積機能を公開し、営業なしで顧客は検討を進めることができます。<br>
+                Web上で顧客自ら使用選定・価格算出が可能になり、そのデータ情報からサポート体制を強化できます。
+            </p>
+            <div class="function-list">
+                <div class="function-item">
+                    <div class="function-item__image">
+                        <img src="https://static.wixstatic.com/media/48d911_6f120caef63847c1af3e10d2446aaa7d~mv2.png" alt="Flaecia CPQ 画面">
+                    </div>
+                    <div class="function-item__title">
+                        <span>お客様からの</span>
+                        お問い合わせ内容
+                    </div>
+                    <p class="function-item__desc">
+                        検討した情報や選定内容を紐づけての問い合わせが可能なため、検討の背景情報など入力する事なく、問い合わせができます。
+                    </p>
+                </div>
+                <div class="function-item">
+                    <div class="function-item__image">
+                        <img src="https://static.wixstatic.com/media/48d911_9269b1204ac74c038e844f8df845d0d7~mv2.png" alt="Flaecia CPQ 画面">
+                    </div>
+                    <div class="function-item__title">
+                        <span>メーカーお問い合わせ担当の</span>
+                        お問い合わせへの回答情報
+                    </div>
+                    <p class="function-item__desc">
+                        お客様の検討した内容を確認ができるため、的確な情報提供が可能です。また、問い合わせのステータス管理により常に営業状況を把握できます。
+                    </p>
+                </div>
+                <div class="function-item">
+                    <div class="function-item__image">
+                        <img src="https://static.wixstatic.com/media/48d911_2ef44ea3f819488796023c9a6c0af855~mv2.png" alt="Flaecia CPQ 画面">
+                    </div>
+                    <div class="function-item__title">
+                        会員サイト
+                    </div>
+                    <p class="function-item__desc">
+                        お客様が会員登録することで、検討メモの記入、検討内容等の保存などができ、お客様の調査・検討をサポートできます。
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="function-block">
+            <div class="function-block__line">
+                ルールは自動管理・自動生成
+            </div>
+            <h3 class="function-block__title">
+                維持メンテナンスが容易な<br class="sp">製品ルール管理
+            </h3>
+            <p class="function-block__desc">
+                選定する製品の有効日付を用いた厳格なリビジョン管理のほかに、製品写真、外部PGコンテンツも管理できます。
+            </p>
+            <div class="function-list">
+                <div class="function-item">
+                    <div class="function-item__image">
+                        <img src="https://static.wixstatic.com/media/48d911_c8e4fdf931e1453c80430fb06c0588b2~mv2.png" alt="Flaecia CPQ 画面">
+                    </div>
+                    <div class="function-item__title">
+                        Excelベースのルール定義
+                    </div>
+                    <p class="function-item__desc">
+                        設計者が選定ルールをExcelベースで直接作成・更新ができ、仕様変更時も即座に対応可能です。
+                    </p>
+                </div>
+                <div class="function-item">
+                    <div class="function-item__image">
+                        <img src="https://static.wixstatic.com/media/48d911_e59120b8e7cc46b98c67b28c043e8d45~mv2.png" alt="Flaecia CPQ 画面">
+                    </div>
+                    <div class="function-item__title">
+                        ルールを組み合わせて<br>
+                        コンパイル
+                    </div>
+                    <p class="function-item__desc">
+                        仕様、ルール、技術計算は組み合わせて再利用できます。複数の定義書を組み合わせて整合性をチェックし、ルールを生成します。
+                    </p>
+                </div>
+                <div class="function-item">
+                    <div class="function-item__image">
+                        <img src="https://static.wixstatic.com/media/48d911_67c292f3aaf647a9a90f59ee6a161375~mv2.png" alt="Flaecia CPQ 画面">
+                    </div>
+                    <div class="function-item__title">
+                        検証デバッグ
+                    </div>
+                    <p class="function-item__desc">
+                        リリース前のルールの事前検証や、トラブル時に再現選定ができます。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<section id="section-case" class="case">
+    <div class="l-container">
+        <div class="section-header">
+            <h2 class="section-title">
+                導入事例
+            </h2>
+        </div>
+    </div>
+    <div class="logo-marquee">
+        <div class="logo-marquee__inner">
+            <img src="https://static.wixstatic.com/media/48d911_1b222984a0bf48be89e2e87ab611d1d5~mv2.jpg"
+                 alt="導入企業のロゴ一覧" class="logo-marquee__image">
+            <img src="https://static.wixstatic.com/media/48d911_1b222984a0bf48be89e2e87ab611d1d5~mv2.jpg"
+                 alt="" aria-hidden="true" class="logo-marquee__image">
+        </div>
+    </div>
+    <div class="l-container">
+        <div class="cases">
+            <div class="case-block">
+                <div class="case-block__num">
+                    Case<br>
+                    01
+                </div>
+                <h3 class="case-block__title">
+                    属人化した設計見積を仕組み化し、誰でも正確な見積を実現
+                </h3>
+                <div class="case-block__container">
+                    <div class="case-block__header">
+                        <div class="case-block__image">
+                            <img src="https://static.wixstatic.com/media/48d911_bf718047777b42de983ef523cf568d62~mv2.png" alt="産業用ロボットメーカーA社">
+                        </div>
+                        <div class="case-block__client">
+                            産業用ポンプメーカーA社
+                        </div>
+                        <p>
+                            年商180億円、従業員350名<br>
+                            国内3拠点
+                        </p>
+                    </div>
+                    <div class="case-block__main">
+                        <div class="case-block__before">
+                            <div class="case-block__before-title">
+                                抱えていた課題
+                            </div>
+                            <div class="case-block__before-content">
+                                熟練設計者が中心となる見積・仕様確定業務が属人化。若手社員は判断が難しく、熟練設計者に負荷が集中し回答に時間がかかることで受注機会を逃していた。
+                            </div>
+                        </div>
+                        <div class="case-block__after">
+                            <div class="case-block__after-title">
+                                Fleacia導入後
+                            </div>
+                            <div class="case-block__after-content">
+                                ベテランの判断ロジックをFleacia上に構築し、誰でも同じ手順で正確な見積作成が可能に。業務標準化とノウハウ継承を同時に実現できた。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="case-block">
+                <div class="case-block__num">
+                    Case<br>
+                    02
+                </div>
+                <h3 class="case-block__title">
+                    見積スピードを3倍に向上し、海外拠点との連携もスムーズに
+                </h3>
+                <div class="case-block__container">
+                    <div class="case-block__header">
+                        <div class="case-block__image">
+                            <img src="https://static.wixstatic.com/media/48d911_90f1319e4aaf4856809e44a5ffcb29b4~mv2.png" alt="工作機械メーカーB社">
+                        </div>
+                        <div class="case-block__client">
+                            精密計測機器メーカーB社
+                        </div>
+                        <p>
+                            年商250億円、従業員500名<br>
+                            海外拠点5カ国
+                        </p>
+                    </div>
+                    <div class="case-block__main">
+                        <div class="case-block__before">
+                            <div class="case-block__before-title">
+                                抱えていた課題
+                            </div>
+                            <div class="case-block__before-content">
+                                見積作成に数日を要し、顧客対応の遅れから受注競争で不利に。海外拠点や代理店は別システムを使用し、情報共有にもタイムラグがあった。
+                            </div>
+                        </div>
+                        <div class="case-block__after">
+                            <div class="case-block__after-title">
+                                Fleacia導入後
+                            </div>
+                            <div class="case-block__after-content">
+                                WebベースのCPQ環境により、全拠点で共通の見積ルールを即時反映。見積スピードが3倍に向上し、グローバルで統一された営業体制を構築した。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="case-block">
+                <div class="case-block__num">
+                    Case<br>
+                    03
+                </div>
+                <h3 class="case-block__title">
+                    小さく始めて成果を実感、段階的な導入で全社展開へ
+                </h3>
+                <div class="case-block__container">
+                    <div class="case-block__header">
+                        <div class="case-block__image">
+                            <img src="https://static.wixstatic.com/media/48d911_c728a8948e654e56a673aeee769b0ef7~mv2.png" alt="精密機器メーカーC社">
+                        </div>
+                        <div class="case-block__client">
+                            FA機器メーカーC社
+                        </div>
+                        <p>
+                            年商120億円、従業員280名<br>
+                            東海エリア中心
+                        </p>
+                    </div>
+                    <div class="case-block__main">
+                        <div class="case-block__before">
+                            <div class="case-block__before-title">
+                                抱えていた課題
+                            </div>
+                            <div class="case-block__before-content">
+                                設計部門のノウハウがブラックボックス化し、営業からの技術問い合わせが頻発。見積のばらつきや対応遅延が課題だった。
+                            </div>
+                        </div>
+                        <div class="case-block__after">
+                            <div class="case-block__after-title">
+                                Fleacia導入後
+                            </div>
+                            <div class="case-block__after-content">
+                                当社の方法論で設計ノウハウを整理・体系化し、Fleaciaに実装。誰でも同品質の見積が作成できるようになり、標準化と柔軟対応を両立した。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="case-block">
+                <div class="case-block__num">
+                    Case<br>
+                    04
+                </div>
+                <h3 class="case-block__title">
+                    設計ノウハウを可視化し、標準化と特注対応を両立
+                </h3>
+                <div class="case-block__container">
+                    <div class="case-block__header">
+                        <div class="case-block__image">
+                            <img src="https://static.wixstatic.com/media/48d911_0ec346df101740a5a191c8e47961931e~mv2.png" alt="電気機器メーカーD社">
+                        </div>
+                        <div class="case-block__client">
+                            産業機械メーカーD社
+                        </div>
+                        <p>
+                            年商300億円、従業員600名<br>
+                            国内外7拠点
+                        </p>
+                    </div>
+                    <div class="case-block__main">
+                        <div class="case-block__before">
+                            <div class="case-block__before-title">
+                                抱えていた課題
+                            </div>
+                            <div class="case-block__before-content">
+                                設計部門のノウハウがブラックボックス化し、営業からの技術問い合わせが頻発。見積のばらつきや対応遅延が課題だった。
+                            </div>
+                        </div>
+                        <div class="case-block__after">
+                            <div class="case-block__after-title">
+                                Fleacia導入後
+                            </div>
+                            <div class="case-block__after-content">
+                                当社の方法論で設計ノウハウを整理・体系化し、Fleaciaに実装。誰でも同品質の見積が作成できるようになり、標準化と柔軟対応を両立した。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="section-faq" class="faq">
+    <div class="l-container">
+        <div class="section-header">
+            <h2 class="section-title">
+                よくある質問
+                <span class="section-title__sub">F A Q</span>
+            </h2>
+        </div>
+        <nav class="faq-tabs">
+            <ul class="faq-tabs__list">
+                <li class="faq-tabs__item is-active" data-tab="tab1">
+                    <button type="button"> 導入検討時のご不安・<br class="pc">懸念に関して</button>
+                </li>
+                <li class="faq-tabs__item" data-tab="tab2">
+                    <button type="button">業務運用・現場定着に<br class="pc">関して</button>
+                </li>
+                <li class="faq-tabs__item" data-tab="tab3">
+                    <button type="button"> システム連携・<br class="pc">セキュリティに関して</button>
+                </li>
+                <li class="faq-tabs__item" data-tab="tab4">
+                    <button type="button">効果・導入後の支援<br class="pc">に関して</button>
+                </li>
+            </ul>
+        </nav>
+        <!-- メイン FAQ リスト -->
+        <div class="faq-list">
+
+            <div class="faq-groups">
+
+                <div class="faq-group" data-group="tab1">
+                    <!-- Q1 -->
+                    <details class="faq-item" open>
+                        <summary class="faq-item__summary">
+                            <span class="faq-item__q-label">Q.1</span>
+                            <span class="faq-item__question">
+                        CPQを導入したいが、社内にDX専門人材がいません。自社でも導入できますか？
+                    </span>
+                            <span class="faq-item__icon"></span>
+                        </summary>
+
+                        <div class="faq-item__answer">
+                            <span class="faq-item__a-label">A.1</span>
+                            <p>
+                                <strong>問題ありません。</strong><br>
+                                Fleaciaは製造業の実務担当者でも運用しやすい設計で、専門知識がなくても導入可能です。<br>
+                                また、当社の伴走型サポートにより、要件整理・初期設定・検証まで一貫して支援します。<br>
+                                現場主導で小さく始められるのが特徴です。
+                            </p>
+                        </div>
+                    </details>
+
+                    <!-- Q2 -->
+                    <details class="faq-item" open>
+                        <summary class="faq-item__summary">
+                            <span class="faq-item__q-label">Q.2</span>
+                            <span class="faq-item__question">
+                         既存の見積Excelや設計資料をそのまま使えますか？
+                    </span>
+                            <span class="faq-item__icon"></span>
+                        </summary>
+
+                        <div class="faq-item__answer">
+                            <span class="faq-item__a-label">A.2</span>
+                            <p>
+                                <strong>はい。</strong><br>
+                                Fleaciaは既存のExcelで運用している見積ロジックや使用条件を独自の定義書で柔軟に設定できます。<br>
+                                Fleaciaの定義書はExcel形式のため扱いやすく、容易に変換が可能です。<br>
+                                段階的に自動化範囲を広げていけるため、現行業務を大きく変える必要はありません。
+                            </p>
+                        </div>
+                    </details>
+
+                    <!-- Q3 -->
+                    <details class="faq-item" open>
+                        <summary class="faq-item__summary">
+                            <span class="faq-item__q-label">Q.3</span>
+                            <span class="faq-item__question">
+                         初期費用が高額にならないか心配です。スモールスタートは可能ですか？
+                    </span>
+                            <span class="faq-item__icon"></span>
+                        </summary>
+
+                        <div class="faq-item__answer">
+                            <span class="faq-item__a-label">A.3</span>
+                            <p>
+                                <strong>導入が可能です。</strong><br>
+                                FleaciaはSaaS型のため、初期投資を抑えた小規模導入が可能です。<br>
+                                一部製品や主要営業チームからPoC（概念実証）を実施し、効果を確認した上で、全社展開へ拡大するケースが多くあります。
+                            </p>
+                        </div>
+                    </details>
+
+                    <!-- Q4 -->
+                    <details class="faq-item" open>
+                        <summary class="faq-item__summary">
+                            <span class="faq-item__q-label">Q.4</span>
+                            <span class="faq-item__question">
+                          導入期間はどのくらいかかりますか？
+                    </span>
+                            <span class="faq-item__icon"></span>
+                        </summary>
+
+                        <div class="faq-item__answer">
+                            <span class="faq-item__a-label">A.4</span>
+                            <p>
+                                <strong>規模や製品点数によりますが、一般的には3〜5か月程度で稼働可能です。</strong><br>
+                                スモールスタートから徐々に拡張していく導入モデルです。
+                            </p>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="faq-group" data-group="tab2">
+                    <!-- Q5 -->
+                    <details class="faq-item" open>
+                        <summary class="faq-item__summary">
+                            <span class="faq-item__q-label">Q5</span>
+                            <span class="faq-item__question">
+                        現場の営業や設計が新しいシステムを使いこなせるか不安です。
+                    </span>
+                            <span class="faq-item__icon"></span>
+                        </summary>
+
+                        <div class="faq-item__answer">
+                            <span class="faq-item__a-label">A.5</span>
+                            <p>
+                                Fleaciaは製造業向けに画面構成で、営業が直感的に操作できるUI/UXとなっています。
+                                簡単な操作説明で習得でき、営業現場への浸透率が高いのが特徴です。
+                            </p>
+                        </div>
+                    </details>
+
+                    <!-- Q6 -->
+                    <details class="faq-item" open>
+                        <summary class="faq-item__summary">
+                            <span class="faq-item__q-label">Q6</span>
+                            <span class="faq-item__question">
+                                ベテラン社員のノウハウをシステム化するのは難しくないですか？
+                            </span>
+                            <span class="faq-item__icon"></span>
+                        </summary>
+
+                        <div class="faq-item__answer">
+                            <span class="faq-item__a-label">A.6</span>
+                            <p>
+                                当社は、もともと受注設計ノウハウの可視化コンサルティングを行っており、熟練者の判断基準をヒアリングしてルール化・構造化する支援ノウハウがあります。<br>
+                                属人化した判断を仕組み化し、誰でも同じ品質で見積を出せる環境を整えます。
+                            </p>
+                        </div>
+                    </details>
+
+                    <!-- Q7 -->
+                    <details class="faq-item" open>
+                        <summary class="faq-item__summary">
+                            <span class="faq-item__q-label">Q.7</span>
+                            <span class="faq-item__question">
+                         ルール変更や仕様追加が頻繁にあるのですが、柔軟に対応できますか？
+                    </span>
+                            <span class="faq-item__icon"></span>
+                        </summary>
+
+                        <div class="faq-item__answer">
+                            <span class="faq-item__a-label">A.7</span>
+                            <p>
+                                <strong>はい。</strong><br>
+                                Fleaciaは仕様選定・見積ルールをExcel形式の定義書にユーザ自身で設定し、変更も容易に可能です。<br>
+                                新しい仕様や条件変更も短期間で反映できるため、業務変化への追従性が高いです。
+                            </p>
+                        </div>
+                    </details>
+
+                </div>
+
+                <div class="faq-group" data-group="tab3">
+                    <!-- Q8 -->
+                    <details class="faq-item" open>
+                        <summary class="faq-item__summary">
+                            <span class="faq-item__q-label">Q8</span>
+                            <span class="faq-item__question">
+                                既存の販売管理・ERPシステムと連携できますか？
+                    </span>
+                            <span class="faq-item__icon"></span>
+                        </summary>
+
+                        <div class="faq-item__answer">
+                            <span class="faq-item__a-label">A.8</span>
+                            <p>
+                                <strong>可能です。</strong>
+                                FleaciaはAPIベースで設計されており、ERP（OBIC・SAP・SuperStreamなど）や
+                                販売管理システムとのデータ連携に対応しています。
+                                受注から製造、出荷までの一気通貫したプロセスを実現できます。
+                            </p>
+                        </div>
+                    </details>
+
+                    <!-- Q9 -->
+                    <details class="faq-item" open>
+                        <summary class="faq-item__summary">
+                            <span class="faq-item__q-label">Q.9</span>
+                            <span class="faq-item__question">
+                         クラウドサービスのセキュリティ面が心配です。
+                    </span>
+                            <span class="faq-item__icon"></span>
+                        </summary>
+
+                        <div class="faq-item__answer">
+                            <span class="faq-item__a-label">A.9</span>
+                            <p>
+                                Fleaciaは国内データセンターで運用され、通信はすべて暗号化されています。<br>
+                                ユーザー権限管理・アクセスログ監査・多要素認証など、企業利用レベルのセキュリティ対策を標準搭載。<br>
+                                ISO/IEC 27001など国際基準にも準拠しています。
+                            </p>
+                        </div>
+                    </details>
+
+                    <!-- Q10 -->
+                    <details class="faq-item" open>
+                        <summary class="faq-item__summary">
+                            <span class="faq-item__q-label">Q.10</span>
+                            <span class="faq-item__question">
+                         海外拠点や代理店でも利用できますか？
+                    </span>
+                            <span class="faq-item__icon"></span>
+                        </summary>
+
+                        <div class="faq-item__answer">
+                            <span class="faq-item__a-label">A.10</span>
+                            <p>
+                                <strong>はい。</strong>
+                                FleaciaはWebベースのSaaS型のため、海外拠点や代理店も同一環境で利用可能です。<br>
+                                多言語・多通貨対応により、グローバル営業体制の統一化にも活用いただけます。
+                            </p>
+                        </div>
+                    </details>
+
+                </div>
+
+                <div class="faq-group" data-group="tab4">
+                    <!-- Q11 -->
+                    <details class="faq-item" open>
+                        <summary class="faq-item__summary">
+                            <span class="faq-item__q-label">Q.11</span>
+                            <span class="faq-item__question">
+                        導入効果をどのように測定できますか？
+                    </span>
+                            <span class="faq-item__icon"></span>
+                        </summary>
+
+                        <div class="faq-item__answer">
+                            <span class="faq-item__a-label">A.11</span>
+                            <p>
+                                導入初期からKPIを設定し、「見積リードタイム」「見積精度」「属人化率」などを可視化します。<br>
+                                導入企業では、見積作成時間が平均60％短縮、社内確認工数が40％削減といった成果が出ています。
+                            </p>
+                        </div>
+                    </details>
+
+                    <!-- Q12 -->
+                    <details class="faq-item" open>
+                        <summary class="faq-item__summary">
+                            <span class="faq-item__q-label">Q.12</span>
+                            <span class="faq-item__question">
+                         導入後のサポートはどのようになっていますか？
+                    </span>
+                            <span class="faq-item__icon"></span>
+                        </summary>
+
+                        <div class="faq-item__answer">
+                            <span class="faq-item__a-label">A.12</span>
+                            <p>
+                                導入後も専任のカスタマーサクセスチームが継続的に支援します。<br>
+                                運用レビューや改善提案を定期的に実施し、組織定着まで伴走します。<br>
+                                運用後のルール変更や機能追加もサポート対象です。
+                            </p>
+                        </div>
+                    </details>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="footer-cta">
+    <div class="l-container footer-cta__inner">
+        <div class="footer-cta__title">
+            導入に際し、お困りごとがあれば<br class="sp">お気軽にご相談ください！
+        </div>
+        <div class="footer-cta__list">
+            <div class="footer-cta__item">
+                <article class="c-cta-card">
+
+                    <header class="c-cta-card__header">
+                        <div class="c-cta-card__image c-cta-card__image--demo">
+                            <img src="https://static.wixstatic.com/shapes/48d911_d7c2ca36413540708c34efe2214bc408.svg" alt="デモ">
+                        </div>
+                        <h3 class="c-cta-card__title">
+                            無料デモン<br class="pc">
+                            ストレーションの<br>
+                            依頼はこちら →
+                        </h3>
+                    </header>
+
+                    <p class="c-cta-card__desc">
+                        実際の画面をお見せしながら、サービスの概要や詳細機能についてご説明いたします
+                    </p>
+
+                    <a href="https://www.future-artisan.co.jp/contact/Fleacia_demo" class="c-cta-card__button c-cta-card__button--demo" target="_blank">
+                        無料デモ依頼はこちら
+                    </a>
+
+                </article>
+            </div>
+            <div class="footer-cta__item">
+                <article class="c-cta-card">
+
+                    <header class="c-cta-card__header">
+                        <div class="c-cta-card__image c-cta-card__image--contact">
+                            <img src="https://static.wixstatic.com/shapes/48d911_6cb73380d0864766af6930cf26605386.svg" alt="導入のご相談">
+                        </div>
+                        <h3 class="c-cta-card__title">
+                            導入のご相談は<br class="pc">
+                            こちら →
+                        </h3>
+                    </header>
+
+                    <p class="c-cta-card__desc">
+                        実際の導入金額を知りたい方や導入に関するご相談はこちらからお願いいたします。
+                    </p>
+
+                    <a href="https://www.future-artisan.co.jp/contact/fleacia" class="c-cta-card__button c-cta-card__button--contact" target="_blank">
+                        導入のご相談はこちら
+                    </a>
+
+                </article>
+            </div>
+
+            <div class="footer-cta__item">
+                <article class="c-cta-card">
+
+                    <header class="c-cta-card__header">
+                        <div class="c-cta-card__image c-cta-card__image--dl">
+                            <img src="https://static.wixstatic.com/shapes/48d911_fb7b5c3251ed45fabba1b4f94be961dd.svg" alt="資料ダウンロード">
+                        </div>
+                        <h3 class="c-cta-card__title">
+                            製品資料の<br class="pc">
+                            ダウンロードは<br>
+                            こちら →
+                        </h3>
+                    </header>
+
+                    <p class="c-cta-card__desc">
+                        Fleacia CPQの製品カタログをダウンロードしたい方はこちらからお願いいたします。
+                    </p>
+
+                    <a href="https://www.future-artisan.co.jp/resources/FleaciaCPQ_DL" class="c-cta-card__button c-cta-card__button--download" target="_blank">
+                        資料のダウンロードはこちら
+                    </a>
+
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="l-footer">
+    <div class="l-footer-navi">
+        <!-- <ul>
+            <li>
+                <a href="#section-problem">解決できる課題</a>
+            </li>
+            <li>
+                <a href="#section-feature">製品の特徴</a>
+            </li>
+            <li>
+                <a href="#section-function">機能</a>
+            </li>
+            <li>
+                <a href="#section-case">導入事例</a>
+            </li>
+            <li>
+                <a href="#section-faq">FAQ</a>
+            </li>
+        </ul> -->
+    </div>
+    <div class="l-container company">
+        <div class="company-header">
+            <img src="https://static.wixstatic.com/media/48d911_17e6626213804f228aca42943d19fbac~mv2.jpg" alt="FUTUREロゴ" class="company-logo">
+            <p class="company-name">フューチャーアーティザン株式会社</p>
+        </div>
+        <div class="company-link">
+            <a href="https://www.future-artisan.co.jp/company" target="_blank">会社情報</a>
+            <a href="https://www.collaborative-dx.com/" target="_blank">Collaboradlive DX<br class="sp">（経営者・ビジネスリーダー向けメディア）</a>
+        </div>
+        <div class="company-copyright">
+            Copyright ©2025 by Future Artisan,Inc.
+        </div>
+    </div>
+</div>
+<div class="l-sub-links">
+    <ul class="l-sub-links__list">
+        <li class="l-sub-links__item"><a href="https://www.future-artisan.co.jp/privacy-policy" target="_blank">個人情報保護方針</a></li>
+        <li class="l-sub-links__item"><a href="https://www.future-artisan.co.jp/basic-policy" target="_blank">個人番号及び特定個人情報保護方針</a></li>
+        <li class="l-sub-links__item"><a href="https://www.future-artisan.co.jp/security-policy" target="_blank">セキュリティ基本ポリシー</a></li>
+        <li class="l-sub-links__item"><a href="https://www.future-artisan.co.jp/socialmedia-policy" target="_blank">ソーシャルメディアポリシー</a></li>
+        <li class="l-sub-links__item"><a href="https://www.future-artisan.co.jp/terms" target="_blank">ウェブサイト利用条件</a></li>
+    </ul>
+    <div class="l-sub-links__copyright">
+        Copyright ©2025 by Future Artisan,Inc.
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script>
+// GSAP 必須
+gsap.registerPlugin();
+
+// FAQ accordion animation
+document.querySelectorAll(".faq-item").forEach((item) => {
+  const answer = item.querySelector(".faq-item__answer");
+  if (!item.open) {
+    gsap.set(answer, { height: 0, opacity: 0 });
+  }
+  item.addEventListener("toggle", () => {
+    if (item.open) {
+      const targetHeight = answer.scrollHeight;
+      gsap.fromTo(answer,
+        { height: 0, opacity: 0 },
+        { height: targetHeight, opacity: 1, duration: 0.35, ease: "power2.out",
+          onComplete() { answer.style.height = "auto"; }
+        }
+      );
+    } else {
+      gsap.fromTo(answer,
+        { height: answer.offsetHeight, opacity: 1 },
+        { height: 0, opacity: 0, duration: 0.25, ease: "power1.in" }
+      );
+    }
+  });
+});
+
+// FAQタブ
+const tabs = document.querySelectorAll(".faq-tabs__item");
+const groups = document.querySelectorAll(".faq-group");
+tabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    const target = tab.dataset.tab;
+    tabs.forEach((t) => t.classList.remove("is-active"));
+    tab.classList.add("is-active");
+    groups.forEach((group) => {
+      const isTarget = group.dataset.group === target;
+      if (isTarget) {
+        group.style.display = "block";
+        gsap.fromTo(group, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" });
+      } else {
+        group.style.display = "none";
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
